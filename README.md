@@ -1,6 +1,6 @@
 
 
-## This app provides Image Cache technic with help of SwiftUI with MVVM and Combine
+## This app provides Image Cache technique with help of SwiftUI with MVVM and Combine
 
 This project was Render Images from server by using MemoryCache & DiskCache functionality.
  - First we try to load images from Cache if not available into Cache, we try to load from DiskCache.
