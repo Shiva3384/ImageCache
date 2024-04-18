@@ -17,7 +17,7 @@ class ImageCacheManager {
         imageCache.totalCostLimit = 1024 * 1024 * 100
     }
     
-    
+    // Store images to Cache
     func addImageToCache(key: String, image: UIImage?) {
         guard let image = image else {
             return
@@ -25,6 +25,7 @@ class ImageCacheManager {
         imageCache.setObject(image, forKey: key as AnyObject)
     }
     
+    // Get images from Cache
     func getImageFromCache(key: String) -> UIImage? {
         return imageCache.object(forKey: key as AnyObject) as? UIImage
     }

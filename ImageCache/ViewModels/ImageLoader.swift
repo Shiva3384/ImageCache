@@ -16,15 +16,18 @@ class ImageLoader: ObservableObject {
     
     
     func loadImage(for urlString: String, key: String) {
+        // Get images from cache if available
         if let image = cacheManager.getImageFromCache(key: key) {
             print("Image from Cache")
             self.image = image
         }
+        // Get images from disk if available and store to memory
         else if let image = localStorage.getImage(filename: key) {
             print("Image from Local")
             self.image = image
             cacheManager.addImageToCache(key: key, image: image)
         }
+        // Download images from server
         else {
             downloadImage(urlString: urlString, key: key)
         }
@@ -37,8 +40,8 @@ class ImageLoader: ObservableObject {
         let task = URLSession.shared.dataTask(with: url) {[weak self] data, response, error in
             guard let data = data, let self = self, let image = UIImage(data: data)  else {
                 self?.setImageData(image:self!.errorImage , key: key)
-                print("Error :: \(error.debugDescription)")
-                print("Response :: \(response.debugDescription)")
+//                print("Error :: \(error.debugDescription)")
+//                print("Response :: \(response.debugDescription)")
                 return
             }
             self.setImageData(image: image, key: key)

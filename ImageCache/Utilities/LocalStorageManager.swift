@@ -10,12 +10,13 @@ import UIKit
 
 class LocalStorageManager {
     let fileManager = FileManager.default
-    let imagesDirectory = "local_images"
+    let imagesDirectory = "disk_images"
     static let instance = LocalStorageManager()
     private init() {
         createDirectory()
     }
     
+    // Create disk_images folder if not available
     func createDirectory() {
         guard let path = getFolderPath() else {
             return
@@ -29,6 +30,7 @@ class LocalStorageManager {
         }
     }
     
+    // Get disk_images folder path
     func getFolderPath() -> URL? {
         guard let documentsURL = fileManager.urls(for: .cachesDirectory, in: .userDomainMask).first else {
             return nil
@@ -36,6 +38,7 @@ class LocalStorageManager {
         return documentsURL.appendingPathComponent(imagesDirectory)
     }
     
+    // Store images to Disk
     func addImage(filename: String, image: UIImage?) {
         guard let path = getFolderPath(), let image = image else {
             return
@@ -49,6 +52,7 @@ class LocalStorageManager {
         }
     }
     
+    // Get images from Disk
     func getImage(filename: String) -> UIImage? {
         guard let path = getFolderPath() else {
             return nil
